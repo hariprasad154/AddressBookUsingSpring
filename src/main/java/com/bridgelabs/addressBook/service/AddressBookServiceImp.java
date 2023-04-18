@@ -5,6 +5,7 @@ import com.bridgelabs.addressBook.dto.ResponceDto;
 import com.bridgelabs.addressBook.exception.CustomException;
 import com.bridgelabs.addressBook.model.AddressBookData;
 import com.bridgelabs.addressBook.repository.AddressbookRepository;
+import com.bridgelabs.addressBook.util.EmailService;
 import com.bridgelabs.addressBook.util.JWTToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,16 @@ public class AddressBookServiceImp implements AddressBookService{
     private AddressbookRepository addressbookRepository;
     @Autowired
     private JWTToken jwtToken;
+    @Autowired
+    private EmailService emailService;
     @Override
     public ResponceDto addData(AddressBookDto addressBookDto) {
         AddressBookData addressBookData=new AddressBookData(addressBookDto);
         addressbookRepository.save(addressBookData);
         String token=jwtToken.createToken(addressBookData.getId());
+        emailService.sendEmail(addressBookDto.getEmail(),"The data added successfully ","hi  .."+addressBookDto.getName()+"\n your data added succsessfully ");
+
+        addressBookData.setToken(token);
         list.add(addressBookData);
         ResponceDto responceDto=new ResponceDto(token,addressBookData);
         return responceDto;
