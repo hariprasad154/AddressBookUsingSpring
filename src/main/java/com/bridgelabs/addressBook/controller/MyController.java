@@ -2,12 +2,12 @@ package com.bridgelabs.addressBook.controller;
 
 import com.bridgelabs.addressBook.dto.AddressBookDto;
 import com.bridgelabs.addressBook.dto.ResponceDto;
+import com.bridgelabs.addressBook.model.AddressBookData;
 import com.bridgelabs.addressBook.service.AddressBookService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MyController {
@@ -17,4 +17,22 @@ public class MyController {
     public ResponceDto addData(@Valid @RequestBody AddressBookDto addressBookDto){
         return addressBookService.addData(addressBookDto);
     }
+    @GetMapping("/{id}")
+    public ResponceDto getDataByid(@PathVariable int id){
+        AddressBookData addressBookData = addressBookService.getEmployeeById(id);
+        ResponceDto responceDto = new ResponceDto("Data is",addressBookData);
+        return responceDto;
+    }
+    @PutMapping("/delete/{id}")
+    public ResponceDto update(@RequestBody AddressBookDto addressBookDto,@PathVariable int id){
+        AddressBookData addressBookData =addressBookService.UpdateEmployee(id,addressBookDto);
+        ResponceDto responceDto = new ResponceDto("Data is",addressBookData);
+        return responceDto;
+    }
+    @DeleteMapping("/delete/{id}")
+    public String Delete(@PathVariable int id){
+        addressBookService.delete(id);
+        return "Deleted the data from the id"+id;
+    }
+
 }
