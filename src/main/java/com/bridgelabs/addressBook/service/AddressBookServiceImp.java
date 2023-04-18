@@ -16,6 +16,8 @@ import java.util.List;
 @Service
 public class AddressBookServiceImp implements AddressBookService{
     List<AddressBookData> list=new ArrayList<>();
+    List<AddressBookData> updatedList=new ArrayList<>();
+    List<AddressBookData> deletedList=new ArrayList<>();
     @Autowired
     private AddressbookRepository addressbookRepository;
     @Autowired
@@ -38,6 +40,7 @@ public class AddressBookServiceImp implements AddressBookService{
     @Override
     public AddressBookData UpdateEmployee(int id, AddressBookDto addressBookDto) {
         AddressBookData addressBookData =this.getById(id);
+        updatedList.add(addressBookData);
         addressBookData.updateData(addressBookDto);
         return addressbookRepository.save(addressBookData);
     }
@@ -45,6 +48,7 @@ public class AddressBookServiceImp implements AddressBookService{
     @Override
     public void delete(int id) {
         AddressBookData addressBookData =this.getById(id);
+        deletedList.add(addressBookData);
         addressbookRepository.delete(addressBookData);
     }
 
@@ -57,6 +61,20 @@ public class AddressBookServiceImp implements AddressBookService{
     public AddressBookData getdataByToken(String token) {
         int id= jwtToken.decodeToken(token);
         return addressbookRepository.findById(id).orElseThrow(() -> new CustomException("Employee Not found :- "+id));
+    }
+
+    @Override
+    public List<AddressBookData> getdeletedData() {
+        return deletedList;
+//        List<> data=new ArrayList<>();
+//        myRepo.findAll().forEach(datas -> data.add(datas));
+//        return data;
+
+    }
+
+    @Override
+    public List<AddressBookData> getoriginalData() {
+        return updatedList;
     }
 
 
