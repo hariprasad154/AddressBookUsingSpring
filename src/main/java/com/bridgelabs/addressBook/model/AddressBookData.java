@@ -1,5 +1,6 @@
 package com.bridgelabs.addressBook.model;
 
+import com.bridgelabs.addressBook.dto.AddressBookDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,4 +20,17 @@ public class AddressBookData {
     private String state;
     private String contactNumber;
     private int zip;
+    public void updateData(AddressBookDto addressBookDto){
+        this.name=addressBookDto.getName();
+        this.address=addressBookDto.getAddress();
+        this.city=addressBookDto.getCity();
+        this.state=addressBookDto.getState();
+        this.contactNumber=addressBookDto.getContactNumber();
+        this.zip=addressBookDto.getZip();
+
+
+    }
+    public AddressBookData(AddressBookDto addressBookDto){
+        this.updateData(addressBookDto);
+    }
 }
