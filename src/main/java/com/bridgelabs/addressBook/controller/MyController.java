@@ -1,6 +1,7 @@
 package com.bridgelabs.addressBook.controller;
 
 import com.bridgelabs.addressBook.dto.AddressBookDto;
+import com.bridgelabs.addressBook.dto.Login;
 import com.bridgelabs.addressBook.dto.ResponceDto;
 import com.bridgelabs.addressBook.dto.Validation;
 import com.bridgelabs.addressBook.model.AddressBookData;
@@ -20,18 +21,6 @@ public class MyController {
 //    public ResponceDto addData(@Valid @RequestBody AddressBookDto addressBookDto){
 //        return addressBookService.addData(addressBookDto);
 //    }
-    @PostMapping("/register")
-    public String register(@RequestBody AddressBookDto addressBookDto){
-
-        return addressBookService.register(addressBookDto);
-    }
-    @PutMapping("/validate")
-    public String validation(@RequestBody Validation validation ){
-
-        return addressBookService.validate(validation) ;
-
-    }
-
     @GetMapping("/{id}")
     public ResponceDto getDataByid(@PathVariable int id){
         AddressBookData addressBookData = addressBookService.getById(id);

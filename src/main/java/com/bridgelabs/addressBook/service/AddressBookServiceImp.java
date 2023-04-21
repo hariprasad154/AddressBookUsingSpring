@@ -1,6 +1,7 @@
 package com.bridgelabs.addressBook.service;
 
 import com.bridgelabs.addressBook.dto.AddressBookDto;
+import com.bridgelabs.addressBook.dto.Login;
 import com.bridgelabs.addressBook.dto.Validation;
 import com.bridgelabs.addressBook.exception.CustomException;
 import com.bridgelabs.addressBook.model.AddressBookData;
@@ -41,36 +42,6 @@ public class AddressBookServiceImp implements AddressBookService{
 //        return responceDto;
 //    }
 
-    @Override
-    public String register(AddressBookDto addressBookDto) {
-        AddressBookData addressBookData=new AddressBookData(addressBookDto);
-        String token=jwtToken.createToken(addressBookData.getId());
-        long genarateOtp= (long) ((Math.random() * 9999) % 8998)+1001;
-        AddressBookData data=new AddressBookData(token,genarateOtp);
-        addressBookData.setOtp(genarateOtp);
-        addressBookData.setToken(token);
-//        addressbookRepository.save(addressBookData);
-        emailService.sendEmail(addressBookData.getEmail(),"The data added successfully ","hi  .."+addressBookData.getName()+"\n your data added succsessfully "+"\n your otp is  <- "+genarateOtp+" ->");
-        return "otp genarated sucsussfully      - " +  token;
-
-    }
-
-    @Override
-    public String validate(Validation validation) {
-        String email=validation.getEmail();
-        long otp=addressbookRepository.findByEmail(email);
-        if(otp==validation.getOtp()){
-            AddressBookData addressBookData =new AddressBookData();
-            addressBookData.setVarifyOtp(true);
-            addressbookRepository.save(addressBookData);
-
-            return "validation done  "+validation.getEmail();
-        }
-        else {
-            return "validation not done";
-        }
-
-    }
 
     @Override
     public AddressBookData getById(int id) {
