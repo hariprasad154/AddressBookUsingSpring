@@ -21,6 +21,7 @@ public interface AddressbookRepository extends org.springframework.data.jpa.repo
     @Query(value = "select email from address_book_data where email= :email",nativeQuery = true)
     String findEmail(String email);
 
+
 //    @Modifying(flushAutomatically = true)
 //    @SQLUpdate(sql = "update address_book_data set password=:password where email= :email")
 
