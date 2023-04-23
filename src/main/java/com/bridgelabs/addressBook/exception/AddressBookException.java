@@ -32,4 +32,5 @@ public class AddressBookException {
         ResponceDto responceDto=new ResponceDto("Exception While handling Rest Api call ,",exception.getMessage());
         return new ResponseEntity<>(responceDto, HttpStatus.BAD_REQUEST);
     }
+
 }

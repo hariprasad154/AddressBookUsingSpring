@@ -28,8 +28,8 @@ public class RegistationServiceImplimantation  implements RegistatioService{
         System.out.println("the email is "+email);
         String mail=addressbookRepository.findEmail(email);
         System.out.println("the-"+mail+"the int mail is ");
-        if(mail==null){
-            return "Enter theunique Email id ";
+        if(mail!=null){
+            return "Enter the unique Email id ";
         }else {
             AddressBookData addressBookData = new AddressBookData(addressBookDto);
             long genarateOtp = (long) ((Math.random() * 9999) % 8998) + 1001;

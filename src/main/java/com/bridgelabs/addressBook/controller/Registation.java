@@ -19,12 +19,17 @@ public class Registation {
     }
     @PutMapping("/validate")
     public String validation(@RequestBody Validation validation ){
+
         return regstationService.validate(validation) ;
+
     }
     @PostMapping("/login")
     public String login (@RequestBody Login login){
         return regstationService.login(login) ;
     }
-
+//    @Mapping("/test")
+//    public String test(@RequestParam String email){
+//        return regstationService.test(email);
+//    }
 
 }

@@ -17,10 +17,10 @@ public class PasswordResetController {
         return passwordReset.forgotPassword(email);
     }
     @PutMapping("/reset")
-    public String resetPassword(@RequestParam String email,@RequestParam String password,@RequestParam long otp){
-        return passwordReset.resetpassword(email,password,otp);
+    public String resetPassword(@RequestParam String email,@RequestParam String password){
+        return passwordReset.resetpassword(email,password);
     }
-    @PutMapping("/validate")
+    @PutMapping("/varify")
     public String validation(@RequestBody Validation validation ){
         return regstationService.validate(validation) ;
     }
