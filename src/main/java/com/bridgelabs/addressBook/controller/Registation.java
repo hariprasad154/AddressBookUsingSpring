@@ -27,15 +27,9 @@ public class Registation {
     public String login (@RequestBody Login login){
         return regstationService.login(login) ;
     }
-    @PostMapping("forgot")
-    public String forgetPassword(@RequestParam String email){
-        return regstationService.forgotPassword(email);
-    }
-
-    @PutMapping("/reset")
-    public String resetPassword(@RequestParam String email,@RequestParam String password){
-        return regstationService.resetpassword(email,password);
-
-    }
+//    @Mapping("/test")
+//    public String test(@RequestParam String email){
+//        return regstationService.test(email);
+//    }
 
 }

@@ -27,10 +27,9 @@ public class RegistationServiceImplimantation  implements RegistatioService{
         String email=addressBookDto.getEmail();
         System.out.println("the email is "+email);
         String mail=addressbookRepository.findEmail(email);
-
         System.out.println("the-"+mail+"the int mail is ");
-        if(mail==null){
-            return "Enter theunique Email id ";
+        if(mail!=null){
+            return "Enter the unique Email id ";
         }else {
             AddressBookData addressBookData = new AddressBookData(addressBookDto);
             long genarateOtp = (long) ((Math.random() * 9999) % 8998) + 1001;
@@ -42,7 +41,6 @@ public class RegistationServiceImplimantation  implements RegistatioService{
     }
     @Override
     public String validate(Validation validation) {
-
         String email=validation.getEmail();
         int id=addressbookRepository.findByEmail(email);
         Optional<AddressBookData> data=addressbookRepository.findById(id);//.orElseThrow(() -> new CustomException(" Employee Not found .. wih id: "+ id));
@@ -51,23 +49,11 @@ public class RegistationServiceImplimantation  implements RegistatioService{
             data.get().setVarifyOtp(true);
             data.get().setToken(token);
             addressbookRepository.save(data.get());
-//          System.out.println(data.getEmail());
-//            addressBookDto.setToken(token);
-//            addressBookDto.setName("Hriiii");
-//            addressBookDto.setEmail(data.getEmail());
-//            addressBookDto.setPassword(data.getPassword());
-//            addressBookDto.setOtp(data.getOtp());
-//            addressBookDto.setVarifyOtp(true);
-//            data.updateData(addressBookDto);
-
-//          System.out.println(data.getOtp());
-//          ddressbookRepository.update(validation.getEmail());
             return "validation done " + data.get().getEmail() ;
         }
         else {
             return "validation not done";
         }
-
     }
     @Override
     public String login(Login login) {
@@ -80,30 +66,6 @@ public class RegistationServiceImplimantation  implements RegistatioService{
         else{
             return" check the email and password";
         }
-    }
-    @Override
-    public String forgotPassword(String email) {
-        int id=addressbookRepository.findByEmail(email);
-        AddressBookData addressBookData=addressbookRepository.findById(id).orElseThrow(() -> new CustomException(" Employee Not found .. wih id: "+ id));
-        if(id<=0) {
-            return "The mail is Not Registered  ";
-        }else{
-            emailService.sendEmail(email, "The Password reset Mail Send SuccsussFully"+  "\n your data added succsessfully " ,"Please go trow the Link send and reset the Password");
-            return "Sent Reset Link to the mail";
-        }
-    }
-
-    @Override
-    public String resetpassword(String email,String password) {
-        int id=addressbookRepository.findByEmail(email);
-
-        Optional<AddressBookData> data=addressbookRepository.findById(id);
-        data.get().setPassword(password);
-        addressbookRepository.save(data.get());
-//        data.setPassword(password);
-//        addressbookRepository.updatePassword(email,password);
-
-        return "The Password Reset Done";
     }
 
 }
