@@ -19,9 +19,7 @@ public class Registation {
     }
     @PutMapping("/validate")
     public String validation(@RequestBody Validation validation ){
-
         return regstationService.validate(validation) ;
-
     }
     @PostMapping("/login")
     public String login (@RequestBody Login login){

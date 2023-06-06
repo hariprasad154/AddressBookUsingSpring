@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*",origins="*")
 public class MyController {
     @Autowired
     private AddressBookService addressBookService;
-//    @PostMapping("/add")
-//    public ResponceDto addData(@Valid @RequestBody AddressBookDto addressBookDto){
-//        return addressBookService.addData(addressBookDto);
-//    }
+    @PostMapping("/add")
+    public ResponceDto addData( @RequestBody AddressBookDto addressBookDto){
+        return addressBookService.addData(addressBookDto);
+    }
     @GetMapping("/{id}")
     public ResponceDto getDataByid(@PathVariable int id){
         AddressBookData addressBookData = addressBookService.getById(id);
@@ -44,12 +45,12 @@ public class MyController {
         ResponceDto responceDto =new ResponceDto("The All Employees ",data);
         return responceDto;
     }
-    @GetMapping("/token")
-    public ResponseEntity<ResponceDto> getDataByToken(@RequestHeader String token){
-       AddressBookData addressBookData=addressBookService.getdataByToken(token);
-       ResponceDto responceDto = new ResponceDto("Data for the token is ",addressBookData);
-       return new ResponseEntity<>(responceDto, HttpStatus.CREATED);
-    }
+//    @GetMapping("/token")
+//    public ResponseEntity<ResponceDto> getDataByToken(@RequestHeader String token){
+//       AddressBookData addressBookData=addressBookService.getdataByToken(token);
+//       ResponceDto responceDto = new ResponceDto("Data for the token is ",addressBookData);
+//       return new ResponseEntity<>(responceDto, HttpStatus.CREATED);
+//    }
     @GetMapping("/DeletedData")
     public ResponceDto getDeletedData(){
         List<AddressBookData> data=addressBookService.getdeletedData();

@@ -2,6 +2,7 @@ package com.bridgelabs.addressBook.service;
 
 import com.bridgelabs.addressBook.dto.AddressBookDto;
 import com.bridgelabs.addressBook.dto.Login;
+import com.bridgelabs.addressBook.dto.ResponceDto;
 import com.bridgelabs.addressBook.dto.Validation;
 import com.bridgelabs.addressBook.exception.CustomException;
 import com.bridgelabs.addressBook.model.AddressBookData;
@@ -41,7 +42,12 @@ public class AddressBookServiceImp implements AddressBookService{
 //        ResponceDto responceDto=new ResponceDto(token,addressBookData);
 //        return responceDto;
 //    }
+@Override
+public ResponceDto addData(AddressBookDto addressBookDto) {
+    AddressBookData addressBookData=new AddressBookData(addressBookDto);
+    return new ResponceDto("The Data Added -",addressbookRepository.save(addressBookData));
 
+}
 
     @Override
     public AddressBookData getById(int id) {

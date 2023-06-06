@@ -14,18 +14,23 @@ public class AddressBookData {
     @Id
     @GeneratedValue
     private int id;
-    private String name;
-    private String email;
-    private String password;
-    private String token;
-    private long otp;
-    private boolean varifyOtp;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String phoneNumber;
+    private String city;
+    private String state;
+    private String zip;
 
 
     public void updateData(AddressBookDto addressBookDto){
-        this.email= addressBookDto.getEmail();
-        this.name= addressBookDto.getName();
-        this.password=addressBookDto.getPassword();
+        this.lastName= addressBookDto.getLastName();
+        this.firstName= addressBookDto.getFirstName();
+        this.address=addressBookDto.getAddress();
+        this.city=addressBookDto.getCity();
+        this.state=addressBookDto.getState();
+        this.phoneNumber=addressBookDto.getPhoneNumber();
+        this.zip=addressBookDto.getZip();
     }
 
     public AddressBookData(AddressBookDto addressBookDto){

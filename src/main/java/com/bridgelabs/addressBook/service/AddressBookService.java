@@ -2,6 +2,7 @@ package com.bridgelabs.addressBook.service;
 
 import com.bridgelabs.addressBook.dto.AddressBookDto;
 import com.bridgelabs.addressBook.dto.Login;
+import com.bridgelabs.addressBook.dto.ResponceDto;
 import com.bridgelabs.addressBook.dto.Validation;
 import com.bridgelabs.addressBook.model.AddressBookData;
 
@@ -25,8 +26,5 @@ public interface AddressBookService {
     List<AddressBookData> getoriginalData();
 
 
-
-
-
-
+    ResponceDto addData(AddressBookDto addressBookDto);
 }
